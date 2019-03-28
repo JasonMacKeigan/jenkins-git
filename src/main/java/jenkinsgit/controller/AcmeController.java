@@ -27,6 +27,8 @@ public class AcmeController {
         Path file = Paths.get("templates", ".well-known", "acme-challenge", url);
 
         System.out.println(String.format("File exists: %s", Files.exists(file)));
+        System.out.println("File: " + file);
+        System.out.println("URL: " + url);
 
         if (Files.exists(file)) {
             try {
