@@ -24,7 +24,7 @@ public class AcmeController {
         if (indexOfSplitter != -1) {
             url = url.substring(indexOfSplitter + 1);
         }
-        Path file = Paths.get("templates", ".well-known", "acme-challenge", url);
+        Path file = Paths.get("src", "main", "resources", "templates", ".well-known", "acme-challenge", url);
 
         System.out.println(String.format("File exists: %s", Files.exists(file)));
         System.out.println("File: " + file);
