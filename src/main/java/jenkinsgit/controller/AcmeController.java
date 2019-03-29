@@ -32,14 +32,12 @@ public class AcmeController {
 
         if (Files.exists(file)) {
             try {
-                System.out.println("File content: " + Files.readAllLines(file));
-            } catch (IOException e) {
-                System.out.println("IOException occured while reading all lines.");
-                e.printStackTrace();
-                // bad practice to fail silently but i need to for this :(
+                return Files.readAllLines(file).stream().findFirst().orElseThrow(NullPointerException::new);
+            } catch (IOException | NullPointerException npe) {
+                return "null";
             }
         }
-        return url;
+        return "null";
     }
 
 }
