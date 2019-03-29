@@ -13,7 +13,7 @@ import java.nio.file.Paths;
  * Created by Jason MK on 2019-03-28 at 5:35 PM
  */
 @RestController
-public class AcmeController {
+public class AcmeChallengeController {
 
     @GetMapping(value = "/.well-known/acme-challenge/**")
     public String get(HttpServletRequest request) {
@@ -26,18 +26,14 @@ public class AcmeController {
         }
         Path file = Paths.get("src", "main", "resources", "templates", ".well-known", "acme-challenge", url);
 
-        System.out.println(String.format("File exists: %s", Files.exists(file)));
-        System.out.println("File: " + file);
-        System.out.println("URL: " + url);
-
         if (Files.exists(file)) {
             try {
                 return Files.readAllLines(file).stream().findFirst().orElseThrow(NullPointerException::new);
             } catch (IOException | NullPointerException npe) {
-                return "null";
+                throw new IllegalStateException("Error while processing file.", npe);
             }
         }
-        return "null";
+        throw new IllegalStateException("Cannot find file.");
     }
 
 }
